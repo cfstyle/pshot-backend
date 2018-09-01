@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-4" >
+  <a class="navbar-brand" href="/">chenfei</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% if results.page == 'index' %} active {% endif %}">
+        <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {% if results.page == 'blog_recent' %} active {% endif %}">
+        <a class="nav-link" href="/blog/recent/">最近</a>
+      </li>
+      <li class="nav-item {% if results.page == 'blog_archive' %} active {% endif %}">
+        <a class="nav-link" href="/blog/archive/">归档</a>
+      </li>
+      <li class="nav-item {% if results.page == 'about' %} active {% endif %}">
+        <a class="nav-link" href="/about/">关于</a>
+      </li>
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> -->
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜索</button>
+      </form>
+    </ul>
+    
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item mr-sm-2">
+         <a class="btn btn-primary" href="/user/register/">注册 </a>
+      </li>
+      <li class="nav-item">
+         <a class="btn btn-outline-info" href="/user/login/">登陆 </a>
+      </li>
+<!--       <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Dropdown link</a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider">
+          </div> <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </li> -->
+    </ul>
+  </div>
+</nav>

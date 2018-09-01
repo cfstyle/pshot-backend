@@ -107,4 +107,4 @@ if __name__ == '__main__':
     #也可以这样写：
     #app.send_file_max_age_default = timedelta(seconds=1)
     app.secret_key = 'secret_chenfei_sdfhUjn(fIh'
-    app.run()
+    app.run(host='0.0.0.0')

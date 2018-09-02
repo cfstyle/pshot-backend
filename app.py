@@ -60,7 +60,7 @@ def get_all_category():
     获取图片分类
     '''
     rs = {
-        'code': True,
+        'code': 0,
         'msg': '',
         'data': {}
     }

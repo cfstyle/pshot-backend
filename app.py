@@ -54,48 +54,60 @@ class Category(Resource):
         cur.close()
         return rs
 
-@app.route("/api/pshot/categories/", methods=['GET', 'POST'])
+@app.route("/api/pshot/categories/", methods=['POST'])
 def get_all_category():
     '''
     获取图片分类
     '''
     rs = {
-        'flag': True,
-        'info': ''
+        'code': True,
+        'msg': '',
+        'data': {}
     }
-    cur = mysql.connection.cursor()
-    cur.execute("select * from category;")
-    rs['data'] = cur.fetchall()
-    cur.close()
+    try:
+        cur = mysql.connection.cursor()
+    except:
+        rs['code'] = -1
+        rs['msg'] = 'mysql connect failed.'
+    else:
+        cur.execute("select * from category;")
+        rs['data']['results'] = cur.fetchall()
+        cur.close()
     return jsonify(rs)
 
 
-@app.route("/api/pshot/images/", methods=['GET'])
+@app.route("/api/pshot/images/", methods=['POST'])
 def get_images():
     '''
     根据分类获取图片
     '''
     rs = {
-        'flag': True,
-        'info': ''
+        'code': 0,
+        'msg': '',
+        'data': {}
     }
-    c_id = request.args.get('category', 1)
-    limit = int(request.args.get('limit', 10))
-    page = int(request.args.get('page', 1))
-    size = request.args.get('size', 'XS').upper()
-    cur = mysql.connection.cursor()
-    cur.execute("select * from image where category={} and size='{}' order by id desc limit {},{};".format(c_id, size, limit*(page-1) + 1, limit*page))
-    data = cur.fetchall()
-    cur.execute("select count(*) as count from image where category={} and size='{}';".format(c_id, size))
-    rs.update(cur.fetchone())
-    cur.close()
-    for each in data:
-        each.update({
-            'url': 'http://ffcc.racing/pshot/images/{}/{}'.format(each['category'], each['name'])
-            })
-    rs['data'] = data
-    if rs['count'] > page * limit:
-        rs['next'] = 'http://ffcc.racing:5000/api/pshot/images/?limit={limit}&page={page}&category={category}&size={size}'.format(limit=limit, page=page + 1, category=c_id, size=size)
+    c_id = request.form.get('category', 1)
+    limit = int(request.form.get('limit', 10))
+    page = int(request.form.get('page', 1))
+    size = request.form.get('size', 'XS').upper()
+    try:
+        cur = mysql.connection.cursor()
+    except:
+        rs['code'] = -1
+        rs['msg'] = 'mysql connect failed.'
+    else:
+        cur.execute("select * from image where category={} and size='{}' order by id desc limit {},{};".format(c_id, size, limit*(page-1) + 1, limit*page))
+        data = cur.fetchall()
+        cur.execute("select count(*) as count from image where category={} and size='{}';".format(c_id, size))
+        rs.update(cur.fetchone())
+        cur.close()
+        for each in data:
+            each.update({
+                'url': 'http://ffcc.racing/pshot/images/{}/{}'.format(each['category'], each['name'])
+                })
+        rs['data']['results'] = data
+        if rs['data']['count'] > page * limit:
+            rs['next'] = 'http://ffcc.racing:5000/api/pshot/images/?limit={limit}&page={page}&category={category}&size={size}'.format(limit=limit, page=page + 1, category=c_id, size=size)
     return jsonify(rs)
 
 api.add_resource(Category, '/api/pshot/category/')

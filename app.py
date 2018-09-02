@@ -99,7 +99,7 @@ def get_images():
         cur.execute("select * from image where category={} and size='{}' order by id desc limit {},{};".format(c_id, size, limit*(page-1) + 1, limit*page))
         data = cur.fetchall()
         cur.execute("select count(*) as count from image where category={} and size='{}';".format(c_id, size))
-        rs.update(cur.fetchone())
+        rs['data'].update(cur.fetchone())
         cur.close()
         for each in data:
             each.update({

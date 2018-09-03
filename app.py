@@ -87,7 +87,7 @@ def get_images():
         'data': {}
     }
     args = request.json
-    if not args:
+    if args == None:
         rs['code'] = '-1'
         rs['msg'] = 'we need json data!, and add Content-Type: application/json to headers'
         return rs

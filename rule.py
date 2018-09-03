@@ -6,8 +6,8 @@
 '''
 
 RULES = {
-    '美食': ['美食', 'food', 'recipe']
-    '壁纸': ['壁纸', 'wallpaper', 'background image']
+    '美食': ['美食', 'food', 'recipe'],
+    '壁纸': ['壁纸', 'wallpaper', 'background image'],
     '咖啡': ['咖啡', 'coffee'],
     '汽车': ['汽车', 'car', 'vehicle',  'roadster', 'sportscar'],
     '设计': ['设计', 'design', 'designer'],

@@ -58,7 +58,7 @@
                 var self = this
                 $.post('/api/pshot/categories/').then(function (res) {
                     self.categories = res.data.results
-                    self.loadImages(this.categories[0].id)
+                    self.loadImages(self.categories[0].id)
                 })
             }
         },

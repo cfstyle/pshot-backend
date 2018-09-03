@@ -104,7 +104,7 @@ def get_images():
         for each in data:
             each.update({
                 'url': 'http://ffcc.racing/pshot/images/{}/{}'.format(each['category'], each['name']),
-                'url_max': 'http://ffcc.racing/pshot/images/{}/{}'.format(each['category'], each['name'].split('_')[0] + '736x.jpg')
+                'url_max': 'http://ffcc.racing/pshot/images/{}/{}'.format(each['category'], each['name'].split('_')[0] + '_736x.jpg')
                 })
         rs['data']['results'] = data
         if rs['data']['count'] > page * limit:

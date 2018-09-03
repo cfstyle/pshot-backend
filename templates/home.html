@@ -25,8 +25,13 @@
               <div class="col text-center" v-for="(category, index) in categories" :cid="category.id" @click="changeCategory(category.id)">[[ category.name ]]</div>
           </div>
           <hr>
+          <div class="row text-center">
+                <button class="btn btn-outline-info text-center" style="width: 150px" v-if="isLastPage" @click="lastPage">上一页</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-outline-info text-center" style="width: 150px" v-if="isNextPage" @click="nextPage">下一页</button>
+          </div>
           <div class="row grid">
-              <div class="grid-item" v-for="(img, index) in data">
+              <div class="col-md-3 grid-item" v-for="(img, index) in data">
                   <img :src="img.url" >
               </div>
           </div>
@@ -46,14 +51,18 @@
         data: function () {
             return {
                 data: [],
-                categories: []
+                categories: [],
+                count: 0,
+                page: 1,
+                limit: 20,
+                category: 1
             }
         },
         mounted: function (){
             this.getCategory()
         },
         methods: {
-            loadImages: function (page) {
+            loadImages: function (page, category) {
                 var self = this
                 $.ajax({
                     url: '/api/pshot/images/',
@@ -61,12 +70,13 @@
                     data: JSON.stringify({
                         page: page,
                         size: 'm',
-                        limit: 20,
-                        category: 1
+                        limit: self.limit,
+                        category: category
                     }),
                     contentType: 'application/json',
                     success: function (res) {
                         self.data = res.data.results
+                        self.count = res.data.count
                     }
                 })
             },
@@ -74,13 +84,37 @@
                 var self = this
                 $.post('/api/pshot/categories/').then(function (res) {
                     self.categories = res.data.results
-                    self.loadImages(self.categories[0].id)
+                    self.loadImages(1, self.categories[0].id)
+                    self.category = self.categories[0].id
                 })
             },
-            changeCategory: function (id) {
-                this.loadImages(id)
+            changeCategory: function (category) {
+                this.loadImages(1, category)
+                this.category = category
+            },
+            nextPage: function () {
+                this.page = this.page + 1
+                this.loadImages(this.page, this.category)
+            },
+            lastPage: function () {
+                this.page = this.page - 1
+                this.loadImages(this.page, this.category)
             }
         },
+        computed: {
+            isNextPage: function () {
+                if (this.page < (this.count/this.limit)) {
+                    return true
+                }
+                return false
+            },
+            isLastPage: function () {
+                if (this.page > 1) {
+                    return true
+                }
+                return false
+            }
+        }
     })
     $('.grid').masonry({
       itemSelector: '.grid-item',

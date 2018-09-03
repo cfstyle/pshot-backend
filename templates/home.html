@@ -4,8 +4,11 @@
 {% block link_exts %}
 <style type="text/css">
     .grid-item{
-        width: 40%;
+        margin-bottom: 10px;
     }
+    .grid-item img{
+        width: 100%;
+    }  
 </style>
 {% endblock %}
 
@@ -19,12 +22,12 @@
       </div> -->
       <div class="images">
           <div class="row">
-              <div class="col text-center" v-for="(category, index) in categories" :cid="category.id">[[ category.name ]]</div>
+              <div class="col text-center" v-for="(category, index) in categories" :cid="category.id" @click="changeCategory(category.id)">[[ category.name ]]</div>
           </div>
           <hr>
           <div class="row grid">
               <div class="grid-item" v-for="(img, index) in data">
-                  <img :src="img.url" @click="">
+                  <img :src="img.url" >
               </div>
           </div>
       </div>
@@ -58,7 +61,7 @@
                     data: JSON.stringify({
                         page: page,
                         size: 'm',
-                        limit: 100,
+                        limit: 20,
                         category: 1
                     }),
                     contentType: 'application/json',
@@ -73,6 +76,9 @@
                     self.categories = res.data.results
                     self.loadImages(self.categories[0].id)
                 })
+            },
+            changeCategory: function (id) {
+                this.loadImages(id)
             }
         },
     })

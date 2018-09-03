@@ -13,6 +13,10 @@ from flask import jsonify
 
 from flask_restful import Resource, Api
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 app = Flask(__name__)
 
 # restful api

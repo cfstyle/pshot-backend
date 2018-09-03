@@ -38,6 +38,7 @@
         },
         methods: {
             loadImages: function (page) {
+                var self = this
                 $.ajax({
                     url: '/api/pshot/images/',
                     type: 'post',
@@ -49,14 +50,15 @@
                     },
                     dataType: 'json',
                     success: function (res) {
-                        this.data = res.data.results
+                        self.data = res.data.results
                     }
                 })
             },
             getCategory: function () {
+                var self = this
                 $.post('/api/pshot/categories/').then(function (res) {
-                    this.categories = res.data.results
-                    this.loadImages(this.categories[0].id)
+                    self.categories = res.data.results
+                    self.loadImages(this.categories[0].id)
                 })
             }
         },

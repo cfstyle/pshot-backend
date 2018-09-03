@@ -1,6 +1,15 @@
 {% extends 'layout.html' %}
 {% block page_title %}首页{% endblock %}
 
+{% block link_exts %}
+<style type="text/css">
+    .grid-item{
+        width: 40%;
+    }
+</style>
+{% endblock %}
+
+
 {% block content %}
 <div class="container">
 <!-- 	<div class="jumbotron">
@@ -8,20 +17,24 @@
         <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
         <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
       </div> -->
-      <div class="images row">
-          <div class="col" v-for="(category, index) in categories" :cid="category.id">[[ category.name ]]</div>
-
+      <div class="images">
+          <div class="row">
+              <div class="col text-center" v-for="(category, index) in categories" :cid="category.id">[[ category.name ]]</div>
+          </div>
           <hr>
-
-          <div class="col-md-2" v-for="(img, index) in data">
-              <img :src="img.url" @click="">
+          <div class="row grid">
+              <div class="grid-item" v-for="(img, index) in data">
+                  <img :src="img.url" @click="">
+              </div>
           </div>
       </div>
+      
 
 </div>
 {% endblock %}
 
 {% block script_exts %}
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
 <script type="text/javascript">
     var image = new Vue({
@@ -63,6 +76,9 @@
             }
         },
     })
-
+    $('.grid').masonry({
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-item'
+    });
 </script>
 {% endblock %}

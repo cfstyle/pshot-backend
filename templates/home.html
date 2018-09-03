@@ -28,17 +28,19 @@
               </button></div>
           </div>
           <hr>
-          <div class="row mb-3">
+          
+          <div class="row grid">
+              <div class="col-md-3 grid-item" v-for="(img, index) in data">
+                  <img :src="img.url" >
+              </div>
+          </div>
+
+          <div class="row">
                 <div class="col-md-12 text-center">
                     <button class="btn btn-outline-info text-center" style="width: 150px" v-if="isLastPage" @click="lastPage">上一页</button>
                 &nbsp;&nbsp;
                     <button class="btn btn-outline-info text-center" style="width: 150px" v-if="isNextPage" @click="nextPage">下一页</button>
                 </div>
-          </div>
-          <div class="row grid">
-              <div class="col-md-3 grid-item" v-for="(img, index) in data">
-                  <img :src="img.url" >
-              </div>
           </div>
       </div>
       

@@ -86,10 +86,15 @@ def get_images():
         'msg': '',
         'data': {}
     }
-    c_id = request.form.get('category', 1)
-    limit = int(request.form.get('limit', 10))
-    page = int(request.form.get('page', 1))
-    size = request.form.get('size', 'XS').upper()
+    args = request.json
+    if not args:
+        rs['code'] = '-1'
+        rs['msg'] = 'we need json data!, and add Content-Type: application/json to headers'
+        return rs
+    c_id = int(args.get('category', 1))
+    limit = int(args.get('limit', 10))
+    page = int(args.get('page', 1))
+    size = args.get('size', 'XS').upper()
     try:
         cur = mysql.connection.cursor()
     except:

@@ -36,6 +36,7 @@ def index():
     results = {
         'page': 'index',
     }
+
     return render_template('home.html', results=results)
 
 @app.route("/about/")

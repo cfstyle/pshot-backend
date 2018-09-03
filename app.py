@@ -91,7 +91,7 @@ def get_images():
     if args == None:
         rs['code'] = '-1'
         rs['msg'] = 'we need json data!, and add Content-Type: application/json to headers'
-        return rs
+        return jsonify(rs)
     c_id = int(args.get('category', 1))
     limit = int(args.get('limit', 10))
     page = int(args.get('page', 1))

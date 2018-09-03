@@ -42,12 +42,12 @@
                 $.ajax({
                     url: '/api/pshot/images/',
                     type: 'post',
-                    data: {
+                    data: JSON.stringify({
                         page: page,
                         size: 'm',
                         limit: 100,
                         category: 1
-                    },
+                    }),
                     dataType: 'json',
                     success: function (res) {
                         self.data = res.data.results

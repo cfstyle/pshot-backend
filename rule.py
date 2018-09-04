@@ -13,5 +13,6 @@ RULES = {
     '设计': ['设计', 'design', 'designer', 'graphic design'],
     '植物': ['植物', 'plant', 'flora', 'flowers', 'plants'],
     '健身': ['健身', 'fitness', 'gym', 'bodybuilding', 'yoga', 'press', 'squat', 'work out'],
-    '动物': ['动物', '宠物', 'animal', 'pet']
+    '动物': ['动物', '宠物', 'animal', 'pet'],
+    '型男': ['型男', '帅哥', '邓伦', '钟汉良', '胡歌', '林更新', 'handsome boy', 'handsome man', 'male star'],
 }
